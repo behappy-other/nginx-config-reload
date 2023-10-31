@@ -4,8 +4,6 @@ ENV GO111MODULE=on \
     GOOS=linux \
     GOARCH=amd64 \
     GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
-RUN go get github.com/fsnotify/fsnotify
-RUN go get github.com/shirou/gopsutil/process
 RUN mkdir -p /go/src/app
 ADD main.go /go/src/app/
 WORKDIR /go/src/app
