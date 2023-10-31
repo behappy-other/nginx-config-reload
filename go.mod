@@ -7,4 +7,5 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/shirou/gopsutil v2.20.3+incompatible
+	github.com/stretchr/testify v1.8.4 // indirect
 )

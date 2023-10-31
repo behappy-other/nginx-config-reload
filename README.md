@@ -3,20 +3,21 @@
 2.sidecar方式共享process、volume   
 3.打开共享进程命名空间特性：shareProcessNamespace: true  
 
-#测试  
+# 基于该Dockerfile构建nginx-reloader镜像：
+docker build -t wangxiaowu950330/nginx-reloader:latest .
+docker push wangxiaowu950330/nginx-reloader:latest
+
+# 测试  
 ``` 
 1.创建nginx configmap  
-kubectl create -f k8s-nginx-test/nginx-config-test.yaml
+kubectl create -f k8s-nginx/nginx-config.yaml
+kubectl create -f k8s-nginx/proxy-conf.yaml
 
 2.部署nginx
-kubectl create -f k8s-nginx-test/test-nginx.yaml
+kubectl create -f k8s-nginx/nginx-deploy-service.yaml
 
 3.修改configmap:nginx-config-v1 
 kubectl edit configmap nginx-config-v1  
-
-return 200 'ok 2020';   --替换--> return 200 '2020 hello';  
-
-4.验证configmap是否生效  
-while true;do curl http://nginx-svc-ip/healthz  && date -R ;done
 ```
 
+手动修改ai-download.yml 后再apply，reloader监测到configmap变化，会主动向nginx主进程发起HUP信号，实现配置热更新。

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: nginx
@@ -18,9 +18,12 @@ spec:
         - name: nginx-config
           configMap:
             name: nginx-config-v01
+        - name: proxy-config
+          configMap:
+            name: proxy-config
       containers:
         - name: nginx
-          image: lvcisco/nginx-1.12.1-alpine:v1.12.1
+          image: nginx:1.25.3-alpine
           ports:
             - name: http
               containerPort: 80
@@ -28,13 +31,17 @@ spec:
               containerPort: 443
           volumeMounts:
             - name: nginx-config
-              mountPath: /etc/nginx/config
-              readOnly: true           
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+              readOnly: true
+            - name: proxy-config
+              mountPath: /etc/nginx/conf.d
+              readOnly: true
         - name: nginx-reloader
-          image: lvcisco/nginx-config-reload:v0.0.1
+          image: wangxiaowu950330/nginx-reloader:latest
           env:
             - name: WATCH_NGINX_CONF_PATH
-              value: /etc/nginx/config
+              value: /etc/nginx/conf.d
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/config
@@ -47,8 +54,11 @@ metadata:
 spec:
   selector:
     app: nginx
+  type: NodePort
   ports:
     - name: http
       port: 80
+      nodePort: 32080
     - name: https
       port: 443
+      nodePort: 32443
