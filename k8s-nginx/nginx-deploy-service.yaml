@@ -17,7 +17,7 @@ spec:
       volumes:
         - name: nginx-config
           configMap:
-            name: nginx-config-v01
+            name: nginx-config
         - name: proxy-config
           configMap:
             name: proxy-config
@@ -43,8 +43,8 @@ spec:
             - name: WATCH_NGINX_CONF_PATH
               value: /etc/nginx/conf.d
           volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/config
+            - name: proxy-config
+              mountPath: /etc/nginx/conf.d
               readOnly: true
 ---
 apiVersion: v1
