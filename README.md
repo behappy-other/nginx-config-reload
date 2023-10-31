@@ -16,8 +16,8 @@ kubectl create -f k8s-nginx/proxy-conf.yaml
 2.部署nginx
 kubectl create -f k8s-nginx/nginx-deploy-service.yaml
 
-3.修改configmap:nginx-config-v1 
-kubectl edit configmap nginx-config-v1  
+3.修改configmap: proxy-config
+kubectl edit configmap proxy-config
 ```
 
 手动修改proxy-conf.yaml 后再apply，reloader监测到configmap变化，会主动向nginx主进程发起HUP信号，实现配置热更新。
