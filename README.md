@@ -20,4 +20,4 @@ kubectl create -f k8s-nginx/nginx-deploy-service.yaml
 kubectl edit configmap nginx-config-v1  
 ```
 
-手动修改ai-download.yml 后再apply，reloader监测到configmap变化，会主动向nginx主进程发起HUP信号，实现配置热更新。
+手动修改proxy-conf.yaml 后再apply，reloader监测到configmap变化，会主动向nginx主进程发起HUP信号，实现配置热更新。
