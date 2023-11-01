@@ -6,7 +6,7 @@ ENV GO111MODULE=on \
     GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 WORKDIR /go/src/app
 COPY . .
-RUN go build -a -o nginx-reloader .
+RUN go mod tidy && go build -a -o nginx-reloader .
 
 FROM nginx:1.25.3-alpine
 COPY --from=build /go/src/app/nginx-reloader /nginx-reloader
