@@ -44,6 +44,7 @@ spec:
         - name: nginx-reloader
           image: wangxiaowu950330/nginx-reloader:latest
           env:
+            # fsnotify不支持子目录递归，所以此处做了调整，value值可用英文逗号拼接多个路径
             - name: WATCH_NGINX_CONF_PATH
               value: /etc/nginx/conf.d
           volumeMounts:
