@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"syscall"
 
 	"github.com/fsnotify/fsnotify"
@@ -117,9 +118,11 @@ func main() {
 	}
 
 	stdoutLogger.Printf("adding path: `%s` to watch\n", pathToWatch)
-
-	if err := watcher.Add(pathToWatch); err != nil {
-		stderrLogger.Fatal(err)
+	// 支持多个文件夹，多文件夹使用逗号分割
+	for _, p := range strings.Split(pathToWatch, ",") {
+		if err := watcher.Add(p); err != nil {
+			stderrLogger.Fatal(err)
+		}
 	}
 	<-done
 }
