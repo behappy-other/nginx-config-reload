@@ -1,11 +1,11 @@
 # nginx-config-reload  
-1.nginx-configmap配置热加载  
-2.sidecar方式共享process、volume   
-3.打开共享进程命名空间特性：shareProcessNamespace: true  
+- nginx-configmap配置热加载
+- sidecar方式共享process、volume
+- 打开共享进程命名空间特性：shareProcessNamespace: true
 
 # 基于该Dockerfile构建nginx-reloader镜像：
-docker build -t wangxiaowu950330/nginx-reloader:latest .
-docker push wangxiaowu950330/nginx-reloader:latest
+- docker build -t wangxiaowu950330/nginx-reloader:latest .
+- docker push wangxiaowu950330/nginx-reloader:latest
 
 # 测试  
 ``` 

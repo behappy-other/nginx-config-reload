@@ -4,8 +4,8 @@ metadata:
   name: proxy-config
 data:
   proxy.conf: |
-    upstream api_wecom_service {
-        server ${api_wecom_ip}:${api_wecom_port} weight=1 max_fails=3 fail_timeout=20;
+    upstream xxx_service {
+        server xxx:xxx weight=1 max_fails=3 fail_timeout=20;
     }
     server {
         listen 80 default_server;
@@ -46,9 +46,9 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Scheme $scheme;
         proxy_set_header X-Forwarded-Host $server_name;
+        proxy_set_header Host $http_host;
     
-        location /api/wecom/v2.0/ {
-            proxy_set_header Host api-wecom;
-            proxy_pass http://api_wecom_service;
+        location /xxx/ {
+            proxy_pass http://xxx_service;
         }
     }
