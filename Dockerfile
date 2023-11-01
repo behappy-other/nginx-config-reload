@@ -3,7 +3,7 @@ ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
-    GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
+    GOPROXY=https://goproxy.cn,direct
 WORKDIR /go/src/app
 COPY . .
 RUN go build -a -o nginx-reloader .
