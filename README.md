@@ -1,5 +1,5 @@
 # nginx-config-reload
-> 该项目旨在实现nginx在kubernetes环境中实现热加载/加载
+> 该项目旨在实现nginx在kubernetes环境中实现热更新/加载
 
 - nginx-configmap配置热加载
 - sidecar方式共享process、volume
