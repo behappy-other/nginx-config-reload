@@ -18,9 +18,9 @@ spec:
         - name: nginx-config
           configMap:
             name: nginx-config
-        - name: proxy-config
+        - name: nginx-proxy-config
           configMap:
-            name: proxy-config
+            name: nginx-proxy-config
         - name: nginx-log
           emptyDir: {}
       containers:
@@ -36,7 +36,7 @@ spec:
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
               readOnly: true
-            - name: proxy-config
+            - name: nginx-proxy-config
               mountPath: /etc/nginx/conf.d
               readOnly: true
             - name: nginx-log
@@ -49,7 +49,7 @@ spec:
             - name: WATCH_NGINX_CONF_PATH
               value: /etc/nginx/conf.d
           volumeMounts:
-            - name: proxy-config
+            - name: nginx-proxy-config
               mountPath: /etc/nginx/conf.d
               readOnly: true
 ---
