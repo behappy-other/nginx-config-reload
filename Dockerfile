@@ -8,6 +8,6 @@ WORKDIR /go/src/app
 COPY . .
 RUN go build -a -o nginx-reloader .
 
-FROM nginx:1.25.3-alpine
+FROM nginx:1.25.3
 COPY --from=build /go/src/app/nginx-reloader /nginx-reloader
 CMD ["/nginx-reloader"]
