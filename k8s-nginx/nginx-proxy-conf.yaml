@@ -47,8 +47,14 @@ data:
         proxy_set_header X-Forwarded-Scheme $scheme;
         proxy_set_header X-Forwarded-Host $server_name;
         proxy_set_header Host $http_host;
-    
+        
         location /xxx/ {
+            set $default_branch "master";
+            if ($http_project_version != "") {
+                set $default_branch $http_project_version;
+            }
+            proxy_set_header project-version $default_branch;
+            proxy_set_header Host xxx-service;
             proxy_pass http://xxx_service;
         }
     }
